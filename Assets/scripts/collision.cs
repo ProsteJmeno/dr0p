@@ -12,6 +12,9 @@ public class collision : MonoBehaviour
     public float explosionRadius;
     public float explosionUpward;
 
+    public GameObject deathScreen;
+    public GameObject[] HUD;
+
     float spheresPivotDistance;
     Vector3 spheresPivot;
 
@@ -23,6 +26,7 @@ public class collision : MonoBehaviour
 
         spheresPivotDistance = sphereSize * spheresInRow / 2;
         spheresPivot = new Vector3(spheresPivotDistance, spheresPivotDistance, spheresPivotDistance);
+        deathScreen.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -40,6 +44,12 @@ public class collision : MonoBehaviour
                     PlayerPrefs.SetInt("highscore", PlayerPrefs.GetInt("score"));
                 }
             }
+            deathScreen.SetActive(true);
+            foreach (GameObject obj in HUD)
+            {
+                obj.SetActive(false);
+            }
+            countdown.isRunning = true;
             explode();
         }
 
@@ -90,7 +100,6 @@ public class collision : MonoBehaviour
 
     private IEnumerator deadSequence()
     {
-        yield return new WaitForSeconds(1);
         animator.SetTrigger("playerDead");
         yield return new WaitForSeconds(1.5f);
         PlayerPrefs.DeleteKey("score");
@@ -99,5 +108,16 @@ public class collision : MonoBehaviour
             Debug.Log(PlayerPrefs.GetInt("highscore"));
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void PlayAgain()
+    {
+        GameObject.FindGameObjectWithTag("deathScreen").SetActive(false);
+        StartCoroutine(deadSequence());
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class quitButton : MonoBehaviour
 {
-    public GameObject toDisable;
+    public GameObject canvasContent;
     public GameObject box;
+    public GameObject credit;
 
     private void Awake()
     {
         box.SetActive(false);
+        credit.SetActive(false);
     }
 
     public void onQuitButtonClick()
@@ -19,13 +21,25 @@ public class quitButton : MonoBehaviour
 
     public void quitClick()
     {
-        toDisable.SetActive(false);
+        canvasContent.SetActive(false);
         box.SetActive(true);
     }
 
     public void nope()
     {
         box.SetActive(false);
-        toDisable.SetActive(true);
+        canvasContent.SetActive(true);
+    }
+
+    public void CreditOn()
+    {
+        canvasContent.SetActive(false);
+        credit.SetActive(true);
+    }
+
+    public void CreditOff()
+    {
+        credit.SetActive(false);
+        canvasContent.SetActive(true);
     }
 }

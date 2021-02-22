@@ -12,6 +12,8 @@ TagManager:
   - Canvas
   - canvasText
   - canvasButton
+  - deathScreen
+  - music
   layers:
   - Default
   - TransparentFX

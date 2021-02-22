@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Advertisements;
 
 public class TimeBody : MonoBehaviour
 {
     bool isRewinding = false;
+    string placement = "rewardedVideo";
 
     List<PointInTime> pointsInTime;
     
@@ -12,6 +14,7 @@ public class TimeBody : MonoBehaviour
     void Start()
     {
         pointsInTime = new List<PointInTime>();
+        Advertisement.Initialize("4022257");
     }
 
     // Update is called once per frame
@@ -30,6 +33,11 @@ public class TimeBody : MonoBehaviour
             StartCoroutine(RewindLength());
         }
 
+    }
+
+    public void reviveButton()
+    {
+       
     }
 
     private IEnumerator RewindLength()

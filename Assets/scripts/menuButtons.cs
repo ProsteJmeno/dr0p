@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class menuButtons : MonoBehaviour
 {
     public Animator textAnimator;
+    public Animator creditText;
     public Animator button1Animator;
     public Animator button2Animator;
     public Animator button3Animator;
+    public Animator creditButton;
     public Animator animationController;
 
     public void onPlayButtonClick()
@@ -18,6 +20,8 @@ public class menuButtons : MonoBehaviour
         button1Animator.SetBool("gameStart", true);
         button2Animator.SetBool("gameStart", true);
         button3Animator.SetBool("gameStart", true);
+        creditButton.SetBool("gameStart", true);
+        creditText.SetBool("gameStart", true);
         StartCoroutine(startAnimation());
     }
 
@@ -36,6 +40,8 @@ public class menuButtons : MonoBehaviour
         button1Animator.SetBool("gameStart", false);
         button2Animator.SetBool("gameStart", false);
         button3Animator.SetBool("gameStart", false);
+        creditButton.SetBool("gameStart", false);
+        creditText.SetBool("gameStart", false);
         SceneManager.LoadScene("gameplay");
     }
 }
