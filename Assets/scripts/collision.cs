@@ -90,7 +90,7 @@ public class collision : MonoBehaviour
         GameObject piece;
 
         piece = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-
+        piece.GetComponent<Renderer>().material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
         piece.transform.position = transform.position + new Vector3(sphereSize * x, sphereSize * y, sphereSize * z) - spheresPivot;
         piece.transform.localScale = new Vector3(sphereSize, sphereSize, sphereSize);
 

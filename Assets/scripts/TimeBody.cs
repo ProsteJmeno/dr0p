@@ -8,6 +8,9 @@ public class TimeBody : MonoBehaviour
     bool isRewinding = false;
     string placement = "rewardedVideo";
 
+    public GameObject[] HUD;
+    public GameObject Waiting;
+
     List<PointInTime> pointsInTime;
     
     // Start is called before the first frame update
@@ -23,21 +26,40 @@ public class TimeBody : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             StartRewind();
-        
         }
-
-        void StartRewind()
-        {
-            isRewinding = true;
-            rewindingBool.delayedRewind = true;
-            StartCoroutine(RewindLength());
-        }
-
     }
+    void StartRewind()
+    {
+        isRewinding = true;
+        rewindingBool.delayedRewind = true;
+        StartCoroutine(RewindLength());
+    }
+   
 
     public void reviveButton()
     {
-       
+        if (Advertisement.IsReady())
+        {
+            Time.timeScale = 0;
+            StartCoroutine(playAd());
+            GameObject.FindGameObjectWithTag("deathScreen").SetActive(false);
+            Waiting.SetActive(true);
+        }
+    }
+
+    IEnumerator playAd()
+    {
+        Advertisement.Show(placement);
+        while (!Advertisement.isShowing)
+            yield return null;
+        yield return new WaitForSecondsRealtime(3);
+        Time.timeScale = 1;
+        Waiting.SetActive(false);
+        foreach (GameObject o in HUD)
+        {
+            o.SetActive(true);
+        }
+        StartRewind();
     }
 
     private IEnumerator RewindLength()
