@@ -6,22 +6,41 @@ using UnityEngine.UI;
 
 public class menuButtons : MonoBehaviour
 {
-    public Animator textAnimator;
-    public Animator creditText;
-    public Animator button1Animator;
-    public Animator button2Animator;
-    public Animator button3Animator;
-    public Animator creditButton;
     public Animator animationController;
+
+    public GameObject canvasContent;
+    Image[] images;
+    Text[] texts;
+
+    private void Start()
+    {
+        images = canvasContent.GetComponentsInChildren<Image>();
+        texts = canvasContent.GetComponentsInChildren<Text>();
+
+        foreach (Image o in images)
+        {
+            o.canvasRenderer.SetAlpha(1);
+        }
+        foreach (Text o in texts)
+        {
+            o.canvasRenderer.SetAlpha(1);
+        }
+    }
 
     public void onPlayButtonClick()
     {
-        textAnimator.SetBool("gameStart", true);
-        button1Animator.SetBool("gameStart", true);
-        button2Animator.SetBool("gameStart", true);
-        button3Animator.SetBool("gameStart", true);
-        creditButton.SetBool("gameStart", true);
-        creditText.SetBool("gameStart", true);
+        images = canvasContent.GetComponentsInChildren<Image>();
+        texts = canvasContent.GetComponentsInChildren<Text>();
+        foreach (Image o in images)
+        {
+            o.CrossFadeAlpha(0, 1, false);
+            print(o.gameObject.name);
+        }
+        foreach (Text o in texts)
+        {
+            o.CrossFadeAlpha(0, 1, false);
+        }
+        //gameObject.GetComponent<Image>().CrossFadeAlpha(0, 1, false);
         StartCoroutine(startAnimation());
     }
 
@@ -36,12 +55,6 @@ public class menuButtons : MonoBehaviour
         yield return new WaitForSeconds(1);
         animationController.SetTrigger("transitionStart");
         yield return new WaitForSeconds(1.5f);
-        textAnimator.SetBool("gameStart", false);
-        button1Animator.SetBool("gameStart", false);
-        button2Animator.SetBool("gameStart", false);
-        button3Animator.SetBool("gameStart", false);
-        creditButton.SetBool("gameStart", false);
-        creditText.SetBool("gameStart", false);
         SceneManager.LoadScene("gameplay");
     }
 }

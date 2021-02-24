@@ -5,13 +5,19 @@ using UnityEngine;
 public class cloneObstacles : MonoBehaviour
 {
     public GameObject obstacle;
-
-    public float cloneDelay;
+    float cloneDelay;
+    [Header("Put here number lower than 1. Time will be multiplied bz this numuber, so lower the number," +
+        " less the time till cloning the obstacle.")]
+    public float spawnRateMultiplier;
     float lastCloneTime;
+
+    float lastSpeedTime;
 
     private void Start()
     {
         Clone();
+        cloneDelay = moveObstacles.defaultSpeedUpTime;
+        lastSpeedTime = Time.time;
     }
 
     public void Update()
@@ -20,6 +26,16 @@ public class cloneObstacles : MonoBehaviour
         if (actualTime >= lastCloneTime + cloneDelay)
         {
             Clone();
+        }
+
+        if(Time.time >= lastSpeedTime + 30f)
+        {
+            cloneDelay = cloneDelay * spawnRateMultiplier;
+        }
+
+        if (cloneDelay < 0.5f)
+        {
+            cloneDelay = 0.5f;
         }
     }
 

@@ -6,7 +6,9 @@ using UnityEngine.Advertisements;
 public class TimeBody : MonoBehaviour
 {
     bool isRewinding = false;
+    bool adShowing;
     string placement = "rewardedVideo";
+
 
     public GameObject[] HUD;
     public GameObject Waiting;
@@ -23,12 +25,13 @@ public class TimeBody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (rewindingBool.shouldRewind)
         {
             StartRewind();
         }
+        adShowing = Advertisement.isShowing;
     }
-    void StartRewind()
+    public void StartRewind()
     {
         isRewinding = true;
         rewindingBool.delayedRewind = true;
@@ -50,21 +53,23 @@ public class TimeBody : MonoBehaviour
     IEnumerator playAd()
     {
         Advertisement.Show(placement);
-        while (!Advertisement.isShowing)
+        yield return null;
+        while (adShowing)       
             yield return null;
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(1);
         Time.timeScale = 1;
         Waiting.SetActive(false);
         foreach (GameObject o in HUD)
         {
             o.SetActive(true);
         }
-        StartRewind();
+        rewindingBool.shouldRewind = true;
     }
 
     private IEnumerator RewindLength()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2.5f);
+        rewindingBool.shouldRewind = false;
         isRewinding = false;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<Rigidbody>().isKinematic = false;
@@ -89,13 +94,18 @@ public class TimeBody : MonoBehaviour
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<MeshRenderer>().enabled = true;
-        print(player.GetComponent<Rigidbody>().velocity);
-        if (pointsInTime.Count > 0)
+        if (pointsInTime.Count > 1)
         {
             PointInTime pointInTime = pointsInTime[0];
             transform.position = pointInTime.position;
             transform.rotation = pointInTime.rotation;
             pointsInTime.RemoveAt(0);
+        }
+        else if (pointsInTime.Count > 0)
+        {
+            PointInTime pointInTime = pointsInTime[0];
+            transform.position = pointInTime.position;
+            transform.rotation = pointInTime.rotation;
         }
     }
     void Record()

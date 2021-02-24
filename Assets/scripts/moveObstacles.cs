@@ -8,6 +8,9 @@ public class moveObstacles : MonoBehaviour
     GameObject[] obstacles;
     public float speedMultiplier;
     public float speedIncreaseDelay;
+
+    public static float defaultSpeedUpTime;
+
     public float speedIncreaseDifference;
     float lastSpeedTime;
 
@@ -16,6 +19,8 @@ public class moveObstacles : MonoBehaviour
 
     void Start()
     {
+        defaultSpeedUpTime = speedIncreaseDelay;
+
         lastSpeedTime = Time.time;
         actualTime = Time.time;
 

@@ -6,4 +6,5 @@ public class rewindingBool : MonoBehaviour
 {
     public static bool rewinding = false;
     public static bool delayedRewind = false;
+    public static bool shouldRewind = false;
 }
