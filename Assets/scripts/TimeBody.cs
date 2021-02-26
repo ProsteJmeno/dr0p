@@ -12,6 +12,10 @@ public class TimeBody : MonoBehaviour
 
     public GameObject[] HUD;
     public GameObject Waiting;
+    public GameObject error;
+    public countdown countdownTimer;
+
+    public static bool hasBeenRevived = false;
 
     List<PointInTime> pointsInTime;
     
@@ -20,6 +24,7 @@ public class TimeBody : MonoBehaviour
     {
         pointsInTime = new List<PointInTime>();
         Advertisement.Initialize("4022257");
+        error.SetActive(false);
     }
 
     // Update is called once per frame
@@ -43,10 +48,18 @@ public class TimeBody : MonoBehaviour
     {
         if (Advertisement.IsReady())
         {
+            hasBeenRevived = true;
             Time.timeScale = 0;
             StartCoroutine(playAd());
+            countdown.isRunning = false;
+            countdownTimer.TimeReset();
             GameObject.FindGameObjectWithTag("deathScreen").SetActive(false);
             Waiting.SetActive(true);
+        }
+        else
+        {
+            error.SetActive(true);
+            GameObject.FindGameObjectWithTag("deathScreen").SetActive(false);
         }
     }
 

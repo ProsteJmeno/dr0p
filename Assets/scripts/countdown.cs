@@ -32,9 +32,9 @@ public class countdown : MonoBehaviour
         }
 
     }
-    void onTimeExpire()
+    public void TimeReset()
     {
-
+        timeStart = 5;
     }
 
     public void playAgain()

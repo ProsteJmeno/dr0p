@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class collision : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class collision : MonoBehaviour
 
     public GameObject deathScreen;
     public GameObject[] HUD;
+    public GameObject error;
+    public GameObject reviveButton;
 
     float spheresPivotDistance;
     Vector3 spheresPivot;
@@ -45,6 +48,10 @@ public class collision : MonoBehaviour
                 }
             }
             deathScreen.SetActive(true);
+            if (TimeBody.hasBeenRevived)
+            {
+                reviveButton.SetActive(false);
+            }
             foreach (GameObject obj in HUD)
             {
                 obj.SetActive(false);
@@ -85,6 +92,11 @@ public class collision : MonoBehaviour
         }       
     }
 
+    private void OnLevelWasLoaded(int level)
+    {
+        TimeBody.hasBeenRevived = false;
+    }
+
     public void createPiece(int x, int y, int z)
     {
         GameObject piece;
@@ -111,8 +123,9 @@ public class collision : MonoBehaviour
     }
 
     public void PlayAgain()
-    {
-        GameObject.FindGameObjectWithTag("deathScreen").SetActive(false);
+    {    
+        deathScreen.SetActive(false);
+        error.SetActive(false);
         StartCoroutine(deadSequence());
     }
 
