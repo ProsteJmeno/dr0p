@@ -21,11 +21,15 @@ public class collision : MonoBehaviour
     float spheresPivotDistance;
     Vector3 spheresPivot;
 
+    AudioSource sound;
+
     Animator animator;
 
     private void Start()
     {
         animator = GameObject.FindGameObjectWithTag("transitionIn").GetComponent<Animator>();
+
+        sound = GetComponent<AudioSource>();
 
         spheresPivotDistance = sphereSize * spheresInRow / 2;
         spheresPivot = new Vector3(spheresPivotDistance, spheresPivotDistance, spheresPivotDistance);
@@ -57,6 +61,7 @@ public class collision : MonoBehaviour
                 obj.SetActive(false);
             }
             countdown.isRunning = true;
+            TimeBody.gameRunning = false;
             explode();
         }
 
@@ -65,6 +70,7 @@ public class collision : MonoBehaviour
 
     public void explode()
     {
+        sound.Play();
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -95,6 +101,8 @@ public class collision : MonoBehaviour
     private void OnLevelWasLoaded(int level)
     {
         TimeBody.hasBeenRevived = false;
+        TimeBody.gameRunning = true;
+        PlayerPrefs.DeleteKey("score");
     }
 
     public void createPiece(int x, int y, int z)

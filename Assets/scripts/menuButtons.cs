@@ -9,6 +9,7 @@ public class menuButtons : MonoBehaviour
     public Animator animationController;
 
     public GameObject canvasContent;
+    public GameObject playButton;
     Image[] images;
     Text[] texts;
 
@@ -29,6 +30,7 @@ public class menuButtons : MonoBehaviour
 
     public void onPlayButtonClick()
     {
+        playButton.GetComponent<Button>().enabled = false;
         images = canvasContent.GetComponentsInChildren<Image>();
         texts = canvasContent.GetComponentsInChildren<Text>();
         foreach (Image o in images)
@@ -40,7 +42,6 @@ public class menuButtons : MonoBehaviour
         {
             o.CrossFadeAlpha(0, 1, false);
         }
-        //gameObject.GetComponent<Image>().CrossFadeAlpha(0, 1, false);
         StartCoroutine(startAnimation());
     }
 

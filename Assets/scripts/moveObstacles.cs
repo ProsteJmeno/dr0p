@@ -37,8 +37,13 @@ public class moveObstacles : MonoBehaviour
 
         if (actualTime >= lastSpeedTime + speedIncreaseDelay)
         {
-            speedMultiplier += speedIncreaseDifference;
             lastSpeedTime = Time.time;
+            if (TimeBody.gameRunning )
+            {
+                speedMultiplier += speedIncreaseDifference;
+                
+                print("speed increased");
+            }
         }
     }
 

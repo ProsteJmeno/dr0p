@@ -14,7 +14,7 @@ public class scoreCounter : MonoBehaviour
 
         if (player != null)
         {
-            if (transform.position.y < player.transform.position.y - player.transform.localScale.y)
+            if (transform.position.y < player.transform.position.y /*- (player.transform.localScale.y/2)*/)
             {
                 scoreCount();
                 wasTriggered = true;
@@ -38,6 +38,8 @@ public class scoreCounter : MonoBehaviour
             {
                 PlayerPrefs.SetInt("score", 1);
             }
+            AudioSource source = GetComponent<AudioSource>();
+            source.Play();
         }
     }
 }

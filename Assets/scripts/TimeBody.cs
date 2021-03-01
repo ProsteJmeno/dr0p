@@ -16,6 +16,7 @@ public class TimeBody : MonoBehaviour
     public countdown countdownTimer;
 
     public static bool hasBeenRevived = false;
+    public static bool gameRunning = true;
 
     List<PointInTime> pointsInTime;
     
@@ -46,6 +47,7 @@ public class TimeBody : MonoBehaviour
 
     public void reviveButton()
     {
+        
         if (Advertisement.IsReady())
         {
             hasBeenRevived = true;
@@ -81,12 +83,13 @@ public class TimeBody : MonoBehaviour
 
     private IEnumerator RewindLength()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(cloneObstacles.spawnTime-(cloneObstacles.spawnTime / 4));
         rewindingBool.shouldRewind = false;
         isRewinding = false;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<Rigidbody>().isKinematic = false;
-        yield return new WaitForSeconds(3f);
+        gameRunning = true;
+        yield return new WaitForSeconds(cloneObstacles.spawnTime - (cloneObstacles.spawnTime / 4));
         rewindingBool.delayedRewind = false;
     }
 

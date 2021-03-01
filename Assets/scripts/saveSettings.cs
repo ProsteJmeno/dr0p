@@ -5,29 +5,29 @@ using UnityEngine;
 public class saveSettings : MonoBehaviour
 {
     float volume;
-    int fullscreen;
+    int colors;
 
     public void volumeChange(float changedVolume)
     {
         volume = changedVolume;
+        PlayerPrefs.SetFloat("volume", volume);
     }
 
-    public void fullscreenChange(bool isFullscreen)
+    public void colorsChange(bool colorsSwitch)
     {
-        if(isFullscreen == true)
+        if(colorsSwitch == true)
         {
-            fullscreen = 1;
+            colors = 1;
         }
         else
         {
-            fullscreen = 0;
+            colors = 0;
         }
+        PlayerPrefs.SetInt("colors", colors);
     }
 
     public void OnApplicationQuit()
-    {
-        PlayerPrefs.SetFloat("volume", volume);
-        PlayerPrefs.SetInt("fullscreen", fullscreen);
+    {       
         PlayerPrefs.Save();
     }
 }

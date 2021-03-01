@@ -6,9 +6,10 @@ public class cloneObstacles : MonoBehaviour
 {
     public GameObject obstacle;
     public float cloneDelay = 5;
-    [Header("Put here number lower than 1. Time will be multiplied bz this numuber, so lower the number," +
+    [Tooltip("Put here number lower than 1. Time will be multiplied by this numuber, so lower the number,"  +
         " less the time till cloning the obstacle.")]
     public float spawnRateMultiplier;
+    public static float spawnTime;
     float lastCloneTime;
     float speedUpDelay;
 
@@ -26,14 +27,19 @@ public class cloneObstacles : MonoBehaviour
         var actualTime = Time.time;
         if (actualTime >= lastCloneTime + cloneDelay)
         {
+            lastCloneTime = Time.time;
             Clone();
         }
 
         if(Time.time >= lastSpeedTime + speedUpDelay)
         {
-            cloneDelay = cloneDelay * spawnRateMultiplier;
             lastSpeedTime = Time.time;
-            print("clone delay lowered: " + cloneDelay);
+            if (TimeBody.gameRunning)
+            {
+                cloneDelay = cloneDelay * spawnRateMultiplier;
+                
+                print("clone delay lowered: " + cloneDelay);
+            }
         }
 
         if (cloneDelay < 1f)
@@ -41,19 +47,21 @@ public class cloneObstacles : MonoBehaviour
             cloneDelay = 1f;
             print("clone delay reached lowest value: " + cloneDelay);
         }
+        spawnTime = cloneDelay;
     }
 
     public void Clone()
     {
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<MeshRenderer>().enabled)
         {
-            if (!rewindingBool.delayedRewind)
+            if (!rewindingBool.delayedRewind || TimeBody.gameRunning)
             {
                 GameObject clone = Instantiate(obstacle);
                 clone.transform.position = new Vector3(0, 15, 0);
                 clone.transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
                 clone.tag = ("obstacle");
-                lastCloneTime = Time.time;
+                
+                print("cloned");
             }
         }
     }
