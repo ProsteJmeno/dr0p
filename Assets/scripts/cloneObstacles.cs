@@ -18,8 +18,10 @@ public class cloneObstacles : MonoBehaviour
     private void Start()
     {
         Clone();
+        Debug.Log("clone on start");
         speedUpDelay = moveObstacles.defaultSpeedUpTime;
         lastSpeedTime = Time.time;
+        lastCloneTime = Time.time;
     }
 
     public void Update()
@@ -29,6 +31,7 @@ public class cloneObstacles : MonoBehaviour
         {
             lastCloneTime = Time.time;
             Clone();
+            Debug.Log("Clone called");
         }
 
         if(Time.time >= lastSpeedTime + speedUpDelay)

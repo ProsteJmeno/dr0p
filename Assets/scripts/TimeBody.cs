@@ -68,7 +68,7 @@ public class TimeBody : MonoBehaviour
     IEnumerator playAd()
     {
         Advertisement.Show(placement);
-        yield return null;
+        yield return new WaitForSecondsRealtime(2);
         while (adShowing)       
             yield return null;
         yield return new WaitForSecondsRealtime(1);
