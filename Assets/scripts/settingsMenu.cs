@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class settingsMenu : MonoBehaviour
 {
     public AudioMixer mixer;
-
+    public GameObject pauseMenu;
+    public GameObject canvasContent;
     private void Start()
     {
         mixer.SetFloat("volume", PlayerPrefs.GetFloat("volume"));
@@ -25,6 +26,13 @@ public class settingsMenu : MonoBehaviour
 
     public void backToMenu()
     {
-        SceneManager.LoadScene("mainMenu");
+        canvasContent.SetActive(true);
+        gameObject.SetActive(false);
+    }
+
+    public void backToPauseMenu()
+    {
+        pauseMenu.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

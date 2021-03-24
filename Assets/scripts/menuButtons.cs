@@ -10,6 +10,7 @@ public class menuButtons : MonoBehaviour
 
     public GameObject canvasContent;
     public GameObject playButton;
+    public GameObject settings;
     Image[] images;
     Text[] texts;
 
@@ -47,7 +48,8 @@ public class menuButtons : MonoBehaviour
 
     public void onSettingsButtonClick()
     {
-        SceneManager.LoadScene("settings");
+        canvasContent.SetActive(false);
+        settings.SetActive(true);
     }
 
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
+//using UnityStandardAssets.CrossPlatformInput;
 
 public class rotateSphere : MonoBehaviour
 {
@@ -9,6 +9,8 @@ public class rotateSphere : MonoBehaviour
     public float rotateSpeed;
     public float speedIncreaseDelay;
     public float speedIncreaseDifference;
+    public rotateClockwise rotateClockwise;
+    public rotateCounterClockwise rotateCounterClockwise;
     float actualTime;
     float lastIncreaseTime;
 
@@ -30,21 +32,15 @@ public class rotateSphere : MonoBehaviour
         {
             if (!rewindingBool.rewinding)
             {
-                if (Input.GetKey(KeyCode.RightArrow) || CrossPlatformInputManager.GetAxis("Horizontal") == -1)
-                {
-                    RotateCounterClockwise();
-                }
-
-                if (Input.GetKey(KeyCode.LeftArrow) || CrossPlatformInputManager.GetAxis("Horizontal") == 1)
-                {
-                    RotateClockwise();
-                }
+                float direction = rotateClockwise.direction + rotateCounterClockwise.direction;
+                gameObject.transform.RotateAround(target.transform.position, Vector3.up * direction, rotateSpeed * Time.deltaTime);
             }
         }
         if (actualTime > lastIncreaseTime + speedIncreaseDelay)
         {
             rotateSpeed += speedIncreaseDifference;
             lastIncreaseTime = Time.time;
+            
         }
     }
 
@@ -57,4 +53,5 @@ public class rotateSphere : MonoBehaviour
     {
         gameObject.transform.RotateAround(target.transform.position, Vector3.down, rotateSpeed * Time.deltaTime);
     }
+
 }

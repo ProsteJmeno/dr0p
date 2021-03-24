@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseButton;
     public GameObject pauseMenuUI;
+    public GameObject settings;
     public GameObject buttons;
     public Text highscore;
 
@@ -57,6 +58,12 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void LoadSettings()
+    {
+        settings.SetActive(true);
+        pauseMenuUI.SetActive(false);
     }
 
 }

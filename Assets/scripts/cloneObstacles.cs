@@ -29,9 +29,12 @@ public class cloneObstacles : MonoBehaviour
         var actualTime = Time.time;
         if (actualTime >= lastCloneTime + cloneDelay)
         {
-            lastCloneTime = Time.time;
-            Clone();
-            Debug.Log("Clone called");
+            if (TimeBody.gameRunning)
+            {
+                lastCloneTime = Time.time;
+                Clone();
+                Debug.Log("Clone called");
+            }
         }
 
         if(Time.time >= lastSpeedTime + speedUpDelay)
