@@ -20,7 +20,9 @@ public class PlayServices : MonoBehaviour
             PlayGamesPlatform.InitializeInstance(config);
             PlayGamesPlatform.DebugLogEnabled = true;
             PlayGamesPlatform.Activate();
-            Social.localUser.Authenticate((bool success) => { });
+            Social.localUser.Authenticate((bool success) => {
+                Debug.Log("Social.localUser.Authenticate: " + success);
+            });
         }
         catch (Exception exception)
         {
@@ -44,6 +46,5 @@ public class PlayServices : MonoBehaviour
             Social.ShowLeaderboardUI();
             print("leaderboard");
         }
-        Social.ShowLeaderboardUI();
     }
 }
