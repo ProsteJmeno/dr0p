@@ -43,12 +43,15 @@ public class collision : MonoBehaviour
             if (!PlayerPrefs.HasKey("highscore"))
             {
                 PlayerPrefs.SetInt("highscore", PlayerPrefs.GetInt("score"));
+                //submit highscore to leaderboard
+                leaderboard.instance.SubmitScoreToLeaderboard(PlayerPrefs.GetInt("score"));
             }
             else
             {
                 if (PlayerPrefs.GetInt("score") > PlayerPrefs.GetInt("highscore"))
                 {
                     PlayerPrefs.SetInt("highscore", PlayerPrefs.GetInt("score"));
+                    //submit score to leaderboard
                 }
             }
             deathScreen.SetActive(true);

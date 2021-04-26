@@ -2104,6 +2104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1494133245}
   - component: {fileID: 1494133244}
+  - component: {fileID: 1494133247}
   - component: {fileID: 1494133246}
   m_Layer: 0
   m_Name: sceneManager
@@ -2151,10 +2152,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1494133243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 110c7718713f06b4090918e086f6385d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c7dbda4699137342b9761972186c0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScore: 0
+--- !u!114 &1494133247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494133243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9cbee2052be1944a62dbcb0ced7aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cloudSaveEnabled: 1
+  autoSignIn: 1
+  autoCloudLoad: 1
 --- !u!1 &1560000499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,6 +2184,7 @@ GameObject:
   - component: {fileID: 1560000503}
   - component: {fileID: 1560000502}
   - component: {fileID: 1560000501}
+  - component: {fileID: 1560000506}
   m_Layer: 5
   m_Name: leaderboard button
   m_TagString: Untagged
@@ -2273,19 +2289,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1560000504}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1494133246}
-        m_TargetAssemblyTypeName: PlayServices, Assembly-CSharp
-        m_MethodName: ShowLeaderboard
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1560000504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2324,6 +2328,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560000499}
   m_CullTransparentMesh: 1
+--- !u!114 &1560000506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560000499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e35abd56f8827428f1d3b9b8fe9188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1585898504
 GameObject:
   m_ObjectHideFlags: 0
