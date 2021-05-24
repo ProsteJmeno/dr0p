@@ -32,10 +32,10 @@ public class PlayServices : MonoBehaviour
 
     public void AddScoreToLeaderboard()
     {
-        if (Social.localUser.authenticated)
-        {
-            Social.ReportScore(playerScore, leaderboardID, success => { });
-        }
+        // if (Social.localUser.authenticated)
+        // {
+        //     Social.ReportScore(playerScore, leaderboardID, success => { });
+        // }
     }
 
     public void ShowLeaderboard()
