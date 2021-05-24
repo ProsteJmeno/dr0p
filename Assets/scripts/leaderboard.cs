@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CloudOnce;
 
 public class leaderboard : MonoBehaviour
 {
@@ -25,7 +24,7 @@ public class leaderboard : MonoBehaviour
 
     public void SubmitScoreToLeaderboard(int score)
     {
-        Leaderboards.Highscore.SubmitScore(score);
+        // Leaderboards.Highscore.SubmitScore(score);
     }
 
 }
